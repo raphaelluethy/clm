@@ -1,0 +1,79 @@
+name: Build
+
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - "*"
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: Type check
+        run: cargo check --all-features
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: Type check
+        run: cargo check --all-features
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Run tests
+        run: cargo test --release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: rust-binary
+          path: target/release/
+          retention-days: 30
