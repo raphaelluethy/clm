@@ -42,7 +42,7 @@ clm What is the capital of France?
 clm Explain quantum computing in simple terms
 ```
 
-### Multi-word prompts
+### Multi-word prompts using punctuation with quotes
 ```bash
 clm "How do I implement a binary search tree in Rust?"
 ```
