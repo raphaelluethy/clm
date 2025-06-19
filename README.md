@@ -6,7 +6,7 @@ A unified command-line interface for interacting with multiple Large Language Mo
 
 - **Multi-provider support**: Switch between OpenAI, Anthropic, Google, and Ollama
 - **Simple CLI interface**: Just pass your prompt as arguments
-- **Usage tracking**: See token usage and response time for each query
+- **Usage tracking**: See token usage, response time, model, and provider for each query
 - **Environment-based configuration**: Easy provider switching via environment variables
 
 ## Installation
@@ -46,6 +46,18 @@ clm Explain quantum computing in simple terms
 ```bash
 clm "How do I implement a binary search tree in Rust?"
 ```
+
+### Response Format
+Each response includes metadata at the bottom showing:
+```
+[Tokens: 150 | Time: 2.34s | Model: gemini-2.5-flash | Provider: google]
+```
+
+This provides visibility into:
+- **Tokens**: Number of tokens used (when available from the provider)
+- **Time**: Response time in seconds
+- **Model**: The specific model that processed the request
+- **Provider**: Which AI provider was used
 
 ## Configuration
 
@@ -196,3 +208,6 @@ cargo check         # Fast type checking
 - **reqwest**: HTTP client for API calls
 - **serde**: JSON serialization/deserialization
 - **anyhow**: Error handling
+
+## Contributions
+This project was partially enhanced with ClaudeCode.

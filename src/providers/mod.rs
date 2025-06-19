@@ -12,6 +12,8 @@ pub struct AiResponse {
     pub content: String,
     pub tokens_used: Option<u32>,
     pub duration: Duration,
+    pub model: String,
+    pub provider: String,
 }
 
 #[async_trait::async_trait]

@@ -110,6 +110,8 @@ impl AiProvider for AnthropicProvider {
             content,
             tokens_used: Some(total_tokens),
             duration,
+            model: self.model.clone(),
+            provider: "anthropic".to_string(),
         })
     }
 }

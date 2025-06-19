@@ -43,13 +43,9 @@ async fn main() -> Result<()> {
 
             let duration_text = format!("Time: {:.2}s", response.duration.as_secs_f64());
 
-            let provider_name = std::env::var("CLM_PROVIDER")
-                .unwrap_or_else(|_| "google".to_string())
-                .to_lowercase();
-
             println!(
-                "\n[{} | {} | {}]",
-                tokens_text, duration_text, provider_name
+                "\n[{} | {} | Model: {} | Provider: {}]",
+                tokens_text, duration_text, response.model, response.provider
             );
         }
         Err(e) => {

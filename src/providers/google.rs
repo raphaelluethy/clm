@@ -127,6 +127,8 @@ impl AiProvider for GoogleProvider {
             content,
             tokens_used,
             duration,
+            model: self.model.clone(),
+            provider: "google".to_string(),
         })
     }
 }

@@ -112,6 +112,8 @@ impl AiProvider for OpenRouterProvider {
             content,
             tokens_used,
             duration,
+            model: self.model.clone(),
+            provider: "openrouter".to_string(),
         })
     }
 }

@@ -106,6 +106,8 @@ impl AiProvider for OpenAiProvider {
             content,
             tokens_used: Some(openai_response.usage.total_tokens),
             duration,
+            model: self.model.clone(),
+            provider: "openai".to_string(),
         })
     }
 }

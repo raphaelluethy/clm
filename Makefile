@@ -1,4 +1,4 @@
-.PHONY: build install clean
+.PHONY: all build install check clean uninstall
 
 # Default target
 all: build

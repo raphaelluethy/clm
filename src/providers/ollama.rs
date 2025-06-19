@@ -89,6 +89,8 @@ impl AiProvider for OllamaProvider {
             content: ollama_response.response,
             tokens_used,
             duration,
+            model: self.model.clone(),
+            provider: "ollama".to_string(),
         })
     }
 }
