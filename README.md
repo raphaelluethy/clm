@@ -116,31 +116,6 @@ When using the global default model (gemini-2.5-flash), each provider maps to it
 - **OpenRouter**: Defaults to "google/gemini-2.5-flash"
 - **Ollama**: Defaults to "llama3.2"
 
-### Complete Configuration Examples
-
-#### Using Google (default)
-```bash
-# Uses defaults: google provider + gemini-2.5-flash model
-export GOOGLE_AI_API_KEY="your-google-api-key"
-clm "What is machine learning?"
-```
-
-#### Using OpenAI with custom model
-```bash
-export CLM_PROVIDER=openai
-export CLM_MODEL="gpt-4"
-export OPENAI_API_KEY="your-openai-api-key"
-clm "Explain quantum computing"
-```
-
-#### Using Anthropic with default model
-```bash
-export CLM_PROVIDER=anthropic
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
-# Will use claude-3-5-sonnet-20241022 as default
-clm "Write a haiku about coding"
-```
-
 ## Project Structure
 
 ```
