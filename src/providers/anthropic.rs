@@ -46,7 +46,7 @@ impl AnthropicProvider {
             .map_err(|_| anyhow::anyhow!("ANTHROPIC_API_KEY environment variable not set"))?;
 
         let model = if model == "DEFAULT" {
-            "claude-4-sonnet".to_string()
+            "claude-sonnet-4-20250514".to_string()
         } else {
             model
         };
