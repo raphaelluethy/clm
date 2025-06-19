@@ -38,7 +38,7 @@ make uninstall # or `cargo uninstall clm`
 
 ### Basic usage
 ```bash
-clm What is the capital of France?
+clm What is the capital of France
 clm Explain quantum computing in simple terms
 ```
 
