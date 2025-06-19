@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Development and Code Quality Guide
+
+## Building
+- Debug build: `cargo build`
+- Release build: `cargo build --release`
+
+## Testing
+- Run tests: `cargo test`
+
+## Code Quality
+- Linting: `cargo clippy`
+- Formatting: `cargo fmt`
+- Fast type checking: `cargo check`
+
+Refer to [README.md](mdc:README.md) for more details.

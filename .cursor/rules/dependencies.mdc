@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Main Dependencies
+
+- **clap**: Command-line argument parsing
+- **tokio**: Async runtime
+- **reqwest**: HTTP client for API calls
+- **serde**: JSON serialization/deserialization
+- **anyhow**: Error handling
+
+See [Cargo.toml](mdc:Cargo.toml) for full dependency details.

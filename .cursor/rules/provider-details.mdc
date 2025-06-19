@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Provider Details Guide
+
+## Google (Default)
+- Default Model: `gemini-2.5-flash`
+- API Key: `GOOGLE_AI_API_KEY`
+- Features: Token usage tracking, error handling
+
+## OpenAI
+- Default Model: `gpt-4.1-mini` (if global default)
+- API Key: `OPENAI_API_KEY`
+- Features: Token usage tracking, error handling
+
+## Anthropic
+- Default Model: `claude-3-5-sonnet-20241022` (if global default)
+- API Key: `ANTHROPIC_API_KEY`
+- Features: Token usage tracking (input + output), error handling
+
+## Ollama
+- Default Model: `llama3.2` (if global default)
+- No API key required (local)
+- Base URL: `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
+- Features: Token usage tracking, error handling

@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Structure Guide
+
+The main entry point is [src/main.rs](mdc:src/main.rs), which handles CLI argument parsing and program startup.
+
+Provider integrations are located in [src/providers/](mdc:src/providers):
+- [mod.rs](mdc:src/providers/mod.rs): Defines the Provider trait and factory logic.
+- [openai.rs](mdc:src/providers/openai.rs): OpenAI GPT integration.
+- [anthropic.rs](mdc:src/providers/anthropic.rs): Anthropic Claude integration.
+- [google.rs](mdc:src/providers/google.rs): Google AI integration.
+- [ollama.rs](mdc:src/providers/ollama.rs): Ollama local model integration.

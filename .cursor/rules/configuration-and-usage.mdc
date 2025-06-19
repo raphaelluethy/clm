@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Configuration and Usage Guide
+
+## Provider Selection
+Set the `CLM_PROVIDER` environment variable to choose your provider:
+- `google` (default)
+- `openai`
+- `anthropic`
+- `openrouter`
+- `ollama`
+
+## API Keys
+Each provider requires its respective API key:
+- `OPENAI_API_KEY`
+- `ANTHROPIC_API_KEY`
+- `GOOGLE_AI_API_KEY`
+- `OPENROUTER_API_KEY`
+- Ollama does not require an API key (runs locally)
+
+## Model Configuration
+Set the `CLM_MODEL` environment variable to specify the model. Each provider has its own default if not set:
+- Google: `gemini-2.5-flash`
+- OpenAI: `gpt-4.1-mini`
+- Anthropic: `claude-4-sonnet`
+- OpenRouter: `google/gemini-2.5-flash`
+- Ollama: `llama3.2`
+
+Ollama base URL can be set with `OLLAMA_BASE_URL` (default: `http://localhost:11434`).
+
+## Example Usage
+```bash
+clm "What is the capital of France?"
+clm "Explain quantum computing in simple terms"
+```
+
+For multi-word prompts, wrap in quotes. Each response includes metadata on tokens, time, model, and provider.
