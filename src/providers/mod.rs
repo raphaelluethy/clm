@@ -2,6 +2,7 @@ use anyhow::Result;
 use std::time::Duration;
 
 pub mod anthropic;
+pub mod custom;
 pub mod google;
 pub mod ollama;
 pub mod openai;
@@ -34,6 +35,7 @@ pub fn get_provider() -> Result<Box<dyn AiProvider + Send + Sync>> {
         "anthropic" => Ok(Box::new(anthropic::AnthropicProvider::new(model)?)),
         "ollama" => Ok(Box::new(ollama::OllamaProvider::new(model)?)),
         "openrouter" => Ok(Box::new(openrouter::OpenRouterProvider::new(model)?)),
+        "custom" => Ok(Box::new(custom::CustomProvider::new(model)?)),
         _ => anyhow::bail!("Unsupported provider: {}", provider),
     }
 }
