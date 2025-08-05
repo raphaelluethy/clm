@@ -4,7 +4,7 @@ A unified command-line interface for interacting with multiple Large Language Mo
 
 ## Features
 
-- **Multi-provider support**: Switch between OpenAI, Anthropic, Google, and Ollama
+- **Multi-provider support**: Switch between OpenAI, Anthropic, Google, Ollama, and Custom providers
 - **Simple CLI interface**: Just pass your prompt as arguments
 - **Usage tracking**: See token usage, response time, model, and provider for each query
 - **Environment-based configuration**: Easy provider switching via environment variables
@@ -100,7 +100,7 @@ Set the `CLM_MODEL` environment variable to specify which model to use:
 # Global model setting (applies to all providers)
 export CLM_MODEL="gemini-2.5-flash"      # Default
 export CLM_MODEL="gpt-4.1-mini"          # For OpenAI
-export CLM_MODEL="claude-4-sonnet"  # For Anthropic  
+export CLM_MODEL="claude-4-sonnet"  # For Anthropic
 export CLM_MODEL="google/gemini-2.5-flash"            # For OpenRouter
 export CLM_MODEL="llama3.2"              # For Ollama
 
@@ -126,8 +126,24 @@ src/
     ├── openai.rs        # OpenAI GPT integration
     ├── anthropic.rs     # Anthropic Claude integration
     ├── google.rs        # Google AI integration
-    └── ollama.rs        # Ollama local model integration
+    ├── ollama.rs        # Ollama local model integration
+    └── custom.rs        # Custom provider integration
 ```
 
 ## Contributions
 This project was partially enhanced with ClaudeCode.
+
+## Custom Provider
+
+The **custom provider** allows you to integrate any LLM service that follows a standard request/response format. To use it, set the following environment variables:
+
+```bash
+export CLM_PROVIDER=custom
+export CUSTOM_PROVIDER_API_KEY="your-custom-api-key"
+export CUSTOM_PROVIDER_API_URL="https://api.yourservice.com/v1/chat/completions"
+export CUSTOM_PROVIDER_NAME="Your Custom Provider"
+```
+
+You can also specify a model with `CLM_MODEL`. If omitted, the provider defaults to `google/gemini-2.5-flash`.
+
+The custom provider implements the same `AiResponse` structure as the built‑in providers, so it works seamlessly with the existing CLI commands.
