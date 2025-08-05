@@ -38,7 +38,7 @@ make uninstall # or `cargo uninstall clm`
 
 ### Basic usage
 ```bash
-clm What is the capital of France?
+clm What is the capital of France
 clm Explain quantum computing in simple terms
 ```
 
@@ -116,31 +116,6 @@ When using the global default model (gemini-2.5-flash), each provider maps to it
 - **OpenRouter**: Defaults to "google/gemini-2.5-flash"
 - **Ollama**: Defaults to "llama3.2"
 
-### Complete Configuration Examples
-
-#### Using Google (default)
-```bash
-# Uses defaults: google provider + gemini-2.5-flash model
-export GOOGLE_AI_API_KEY="your-google-api-key"
-clm "What is machine learning?"
-```
-
-#### Using OpenAI with custom model
-```bash
-export CLM_PROVIDER=openai
-export CLM_MODEL="gpt-4"
-export OPENAI_API_KEY="your-openai-api-key"
-clm "Explain quantum computing"
-```
-
-#### Using Anthropic with default model
-```bash
-export CLM_PROVIDER=anthropic
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
-# Will use claude-3-5-sonnet-20241022 as default
-clm "Write a haiku about coding"
-```
-
 ## Project Structure
 
 ```
@@ -153,61 +128,6 @@ src/
     ├── google.rs        # Google AI integration
     └── ollama.rs        # Ollama local model integration
 ```
-
-## Provider Details
-
-### Google (Default Provider)
-- **Default Model**: gemini-2.5-flash
-- **Model Configuration**: Via `CLM_MODEL` environment variable
-- **Authentication**: API key via `GOOGLE_AI_API_KEY`
-- **Features**: Token usage tracking, error handling
-
-### OpenAI
-- **Default Model**: gpt-4.1-mini (when using global default)
-- **Model Configuration**: Via `CLM_MODEL` environment variable
-- **Authentication**: Bearer token via `OPENAI_API_KEY`
-- **Features**: Token usage tracking, error handling
-
-### Anthropic
-- **Default Model**: claude-3-5-sonnet-20241022 (when using global default)
-- **Model Configuration**: Via `CLM_MODEL` environment variable
-- **Authentication**: API key via `ANTHROPIC_API_KEY`
-- **Features**: Token usage tracking (input + output), error handling
-
-### Ollama
-- **Default Model**: llama3.2 (when using global default)
-- **Model Configuration**: Via `CLM_MODEL` environment variable
-- **Base URL**: Configurable via `OLLAMA_BASE_URL` (defaults to "http://localhost:11434")
-- **Authentication**: None required (local deployment)
-- **Features**: Token usage tracking, error handling
-
-## Development
-
-### Building
-```bash
-cargo build          # Debug build
-cargo build --release # Optimized build
-```
-
-### Testing
-```bash
-cargo test
-```
-
-### Code Quality
-```bash
-cargo clippy         # Linting
-cargo fmt           # Formatting
-cargo check         # Fast type checking
-```
-
-## Dependencies
-
-- **clap**: Command-line argument parsing
-- **tokio**: Async runtime
-- **reqwest**: HTTP client for API calls
-- **serde**: JSON serialization/deserialization
-- **anyhow**: Error handling
 
 ## Contributions
 This project was partially enhanced with ClaudeCode.
