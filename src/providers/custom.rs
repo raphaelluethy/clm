@@ -107,9 +107,9 @@ impl AiProvider for CustomProvider {
             );
         }
 
-        let custom_respone: CustomProviderResponse = response.json().await?;
+        let custom_response: CustomProviderResponse = response.json().await?;
 
-        let content = custom_respone
+        let content = custom_response
             .choices
             .first()
             .ok_or_else(|| anyhow::anyhow!("No response from {} provider", self.provider_name))?
@@ -117,7 +117,7 @@ impl AiProvider for CustomProvider {
             .content
             .clone();
 
-        let tokens_used = custom_respone.usage.map(|u| u.total_tokens);
+        let tokens_used = custom_response.usage.map(|u| u.total_tokens);
 
         Ok(AiResponse {
             content,

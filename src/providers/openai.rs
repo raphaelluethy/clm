@@ -8,6 +8,10 @@ use std::time::Instant;
 struct OpenAiRequest {
     model: String,
     messages: Vec<Message>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    reasoning_effort: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    max_completion_tokens: Option<u32>,
 }
 
 #[derive(Serialize)]
@@ -41,6 +45,8 @@ pub struct OpenAiProvider {
     client: Client,
     api_key: String,
     model: String,
+    reasoning_effort: Option<String>,
+    max_completion_tokens: Option<u32>,
 }
 
 impl OpenAiProvider {
@@ -54,10 +60,24 @@ impl OpenAiProvider {
             model
         };
 
+        let reasoning_effort = std::env::var("OPENAI_REASONING_EFFORT")
+            .ok()
+            .map(|v| v.to_lowercase())
+            .and_then(|v| match v.as_str() {
+                "minimal" | "low" | "medium" | "high" => Some(v),
+                _ => None,
+            });
+
+        let max_completion_tokens = std::env::var("OPENAI_MAX_COMPLETION_TOKENS")
+            .ok()
+            .and_then(|v| v.parse::<u32>().ok());
+
         Ok(Self {
             client: Client::new(),
             api_key,
             model,
+            reasoning_effort,
+            max_completion_tokens,
         })
     }
 }
@@ -67,12 +87,24 @@ impl AiProvider for OpenAiProvider {
     async fn query(&self, prompt: &str) -> Result<AiResponse> {
         let start = Instant::now();
 
+        let supports_reasoning = self.model.to_lowercase().starts_with('o');
+
         let request_body = OpenAiRequest {
             model: self.model.clone(),
             messages: vec![Message {
                 role: "user".to_string(),
                 content: prompt.to_string(),
             }],
+            reasoning_effort: if supports_reasoning {
+                self.reasoning_effort.clone()
+            } else {
+                None
+            },
+            max_completion_tokens: if supports_reasoning {
+                self.max_completion_tokens
+            } else {
+                None
+            },
         };
 
         let response = self
