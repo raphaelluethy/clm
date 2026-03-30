@@ -116,6 +116,12 @@ When using the global default model (gemini-2.5-flash), each provider maps to it
 - **OpenRouter**: Defaults to "google/gemini-2.5-flash"
 - **Ollama**: Defaults to "llama3.2"
 
+#### OpenAI reasoning options (optional)
+CLM can pass OpenAI's reasoning parameters via environment variables:
+
+- `OPENAI_REASONING_EFFORT`: one of `minimal`, `low`, `medium`, `high`
+- `OPENAI_MAX_COMPLETION_TOKENS`: integer (e.g., `1024`)
+
 ## Project Structure
 
 ```
